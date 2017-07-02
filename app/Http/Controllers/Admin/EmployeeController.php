@@ -114,7 +114,7 @@ class EmployeeController extends BaseController
             return $this->setStatusCode(500)->responseError('餐厅不能为空');
 
         //通过第三发表获取门店的员工
-        $restaurant = Restaurant::find($restaurantId);
+        $restaurant = Restaurant::findOrFaild($restaurantId);
         if (!empty($restaurant)){
             $employeeList = collect($restaurant->employee)->map(function ($value){
                return collect($value)->only(['id','username']);
