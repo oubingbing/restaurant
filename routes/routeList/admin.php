@@ -9,9 +9,12 @@
 Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],function (){
     Route::get('/','IndexController@index')->name('entry-admin');//进入后台
 
-    Route::post('/create_company','IndexController@createCompany');//创建公司
-    Route::post('/create_restaurant','IndexController@createRestaurant');//创建门店
-    Route::post('/add_employee','IndexController@addEmployee');//添加员工
+    Route::post('/create_company','IndexController@createCompany')->name('create-company');//创建公司
+    Route::post('/create_restaurant','IndexController@createRestaurant')->name('create-restaurant');//创建门店
+    Route::post('/add_employee','EmployeeController@addEmployee')->name('add-employee');//添加员工
+    Route::post('/assign_employee','EmployeeController@assignEmployeeToRestaurant')->name('assign-employee');//分配员工
+
+    Route::get('/restaurant_employee/{restaurantId}','EmployeeController@getRestaurantEmployee')->name('get-restaurant-employee');//获取门店的员工
 });
 
 Route::group(['middleware'=>'admin.sky','namespace'=>'Entrust'],function (){

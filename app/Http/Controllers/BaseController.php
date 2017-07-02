@@ -104,4 +104,14 @@ class BaseController extends Controller
         ]);
     }
 
+    /**
+     * 获取email session
+     * @param $request
+     * @return mixed
+     */
+    public function getSessionEmail($request)
+    {
+        return $request->session()->get('email');
+    }
+
 }

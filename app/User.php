@@ -147,6 +147,17 @@ class User extends Authenticatable
     }
 
     /**
+     * 获取公司id
+     * @author yezi
+     * @param string $email
+     * @return mixed
+     */
+    public static function companyId($email = '')
+    {
+        return Redis::hget($email,'company_id');
+    }
+
+    /**
      * 获取用户名
      * @param $email
      * @return mixed
