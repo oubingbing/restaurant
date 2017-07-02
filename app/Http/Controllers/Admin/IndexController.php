@@ -11,10 +11,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Company;
 use App\Http\Controllers\BaseController;
+use App\Mail\ActivateAccount;
 use App\Restaurant;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 class IndexController extends BaseController
 {
@@ -112,5 +114,41 @@ class IndexController extends BaseController
             return $this->setStatusCode(200)->responseSuccess('创建成功',$result->makeHidden(['id','crateed_at']));
         else
             return $this->setStatusCode(500)->responseFail('创建失败');
+    }
+
+    /**
+     * 添加员工
+     * @author yezi
+     * @param Request $request,
+     *       (string)email:员工邮箱
+     * @return mixed
+     */
+    public function addEmployee(Request $request)
+    {
+        $email = $request->input('email');
+
+        if (empty($email))
+            return $this->setStatusCode(500)->responseError('邮箱不能为空');
+
+        $checkEmail = User::query()->where(User::FIELD_EMAIL,$email)->value('email');
+        if ($checkEmail)
+            return $this->setStatusCode(200)->responseError('邮箱已存在');
+
+       $user =  User::create([
+           'username'       => 'clock',
+           'email'          => $email,
+           'password'       => 'clock',
+           'salt'           => random_int(1000,10000),
+           'activate_token' => str_random(50),
+           'company_id'     => Company::companyId(User::userId($request->session()->get('email')))
+        ]);
+
+        if ($user){
+            Mail::to($email)->send(new ActivateAccount($user));
+            return $this->setStatusCode(200)->responseSuccess('添加员工成功，请员工登录邮箱激活账号');
+        }else{
+            return $this->setStatusCode(500)->responseFail('添加失败');
+        }
+
     }
 }

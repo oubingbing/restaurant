@@ -11,5 +11,6 @@ Route::group(['prefix'=>'auth','namespace'=>'Authorization'],function (){
     Route::post('/login','LoginController@login')->name('login.post');
     Route::get('/logout','LoginController@logout')->name('logout.post');
 
-    Route::get('/test','LoginController@test')->name('test.get');
+    Route::get('activate/{token}','RegisterController@activateAccount')->name('activate.get');
+    Route::post('activate/{token}','RegisterController@refreshEmployeeInfo')->name('activate.post');
 });

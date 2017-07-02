@@ -127,6 +127,10 @@ return [
             'required'  => '名称不能为空',
             'unique'    => '名称已存在',
         ],
+        'username'   => [
+            'required'  => '用户名不能为空',
+            'unique'    => '用户名名称已存在',
+        ],
         'display_name' => [
             'required'  => '展示名称不能为空',
         ],

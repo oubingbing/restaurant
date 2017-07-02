@@ -10,19 +10,11 @@ namespace App\Http\Controllers\Authorization;
 
 
 use App\Http\Controllers\BaseController;
-use App\Mail\ActivateAccount;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redis;
 
 class LoginController extends BaseController
 {
-    public function test()
-    {
-        Mail::to('875307054@qq.com')->send(new ActivateAccount());
-    }
-
     /**
      * 登录页面
      * @author yezi
@@ -67,6 +59,11 @@ class LoginController extends BaseController
         }else{
             return $this->setStatusCode(500)->responseFail('用户不存在或密码错误2');
         }
+    }
+
+    public function activateAccount()
+    {
+        return view('auth.activateAccount');
     }
 
     /**

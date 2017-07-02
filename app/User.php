@@ -14,10 +14,6 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    /** status状态值的描述 */
-    const STATUS_NOT_ACTIVE = 1;
-    const STATUS_ACTIVE = 2;
-
     /** 用户id */
     const FIELD_ID = 'id';
 
@@ -36,13 +32,33 @@ class User extends Authenticatable
     /** 盐值 */
     const FIELD_SALT = 'salt';
 
+    /** 用户头像 */
+    const FIELD_AVATAR = 'avatar';
+
+    /** 账号激活token */
+    const FIELD_ACTIVATE_TOKEN = 'activate_token';
+
+    /** 用户所属公司 */
+    const FIELD_COMPANY_ID = 'company_id';
+
+    /** 是否是创始人 */
+    const FIELD_FOUNDER = 'founder';
+
+    /** status状态值的描述 */
+    const STATUS_NOT_ACTIVE = 1;
+    const STATUS_ACTIVE = 2;
+
+    /** 是否是创始人 */
+    const IS_FOUNDER = true;
+    const NOT_FOUNDER = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','status'
+        'username','avatar', 'email', 'password','status','salt','activate_token','company_id','founder'
     ];
 
     /**
@@ -145,4 +161,5 @@ class User extends Authenticatable
         $result = User::query()->find($userId);
         return $result;
     }
+
 }

@@ -11,6 +11,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],
 
     Route::post('/create_company','IndexController@createCompany');//创建公司
     Route::post('/create_restaurant','IndexController@createRestaurant');//创建门店
+    Route::post('/add_employee','IndexController@addEmployee');//添加员工
 });
 
 Route::group(['middleware'=>'admin.sky','namespace'=>'Entrust'],function (){

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,14 +12,15 @@ class ActivateAccount extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $user;
+
     /**
      * Create a new message instance.
-     *
-     * @return void
+     * @param $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -29,6 +31,9 @@ class ActivateAccount extends Mailable
     public function build()
     {
         return $this->subject('确认邮箱')
-                    ->view('welcome');
+                    ->view('auth.activateEmail',[
+                        'user'=>$this->user,
+                        'url'=>route('activate.get',['token'=>$this->user->activate_token])
+                    ]);
     }
 }
