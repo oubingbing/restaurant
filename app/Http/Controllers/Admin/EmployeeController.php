@@ -105,7 +105,7 @@ class EmployeeController extends BaseController
 
     /**
      * 获取门店的员工
-     * @param $restaurantId
+     * @param（int）$restaurantId:门店id
      * @return object
      */
     public function getRestaurantEmployee($restaurantId)
