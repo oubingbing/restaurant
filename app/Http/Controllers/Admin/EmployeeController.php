@@ -115,7 +115,7 @@ class EmployeeController extends BaseController
 
         //通过第三发表获取门店的员工
 
-        $restaurant = Restaurant::find($restaurantId);
+        $restaurant = Restaurant::find($restaurantId);//有改动
         if (!empty($restaurant)){
             $employeeList = collect($restaurant->employee)->map(function ($value){
                return collect($value)->only(['id','username']);
