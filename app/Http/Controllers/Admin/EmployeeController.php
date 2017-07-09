@@ -113,7 +113,7 @@ class EmployeeController extends BaseController
         if (!$restaurantId)
             return $this->setStatusCode(500)->responseError('餐厅不能为空');
 
-        //通过第三发表获取门店的员工
+        //通过第三方表获取门店的员工
         $restaurant = Restaurant::find($restaurantId);
         if (!empty($restaurant)){
             $employeeList = collect($restaurant->employee)->map(function ($value){
@@ -125,4 +125,10 @@ class EmployeeController extends BaseController
 
         return $employeeList;
     }
+
+    public function createSchedule()
+    {
+        
+    }
+
 }

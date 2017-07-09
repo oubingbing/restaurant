@@ -15,6 +15,9 @@ Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],
     Route::post('/assign_employee','EmployeeController@assignEmployeeToRestaurant')->name('assign-employee');//分配员工
 
     Route::get('/restaurant_employee/{restaurantId}','EmployeeController@getRestaurantEmployee')->name('get-restaurant-employee');//获取门店的员工
+
+    Route::put('/test','IndexController@test');
+
 });
 
 Route::group(['middleware'=>'admin.sky','namespace'=>'Entrust'],function (){

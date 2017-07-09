@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Validator;
 
 class IndexController extends BaseController
 {
+
+    public function test(Request $request)
+    {
+        return $request->input('name');
+    }
+
     /**
      * 后台首页
      * @author yezi
