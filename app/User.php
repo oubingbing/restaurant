@@ -119,6 +119,7 @@ class User extends Authenticatable
     public static function clearUserInfo($request)
     {
         $email = $request->session()->get('email');
+        Restaurant::clearRestaurant($request);
         $request->session()->forget('email');
 
         return Redis::del($email);

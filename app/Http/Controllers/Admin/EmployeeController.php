@@ -126,9 +126,4 @@ class EmployeeController extends BaseController
         return $employeeList;
     }
 
-    public function createSchedule()
-    {
-        
-    }
-
 }

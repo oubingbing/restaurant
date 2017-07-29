@@ -75,6 +75,7 @@ class LoginController extends BaseController
     public function logout(Request $request)
     {
         $result = User::clearUserInfo($request);
+
         if ($result)
             return $this->setStatusCode(200)->responseSuccess('退成成功');
         else

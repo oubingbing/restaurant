@@ -6,8 +6,15 @@
  * Time: 15:53
  */
 
+
 Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],function (){
     Route::get('/','IndexController@index')->name('entry-admin');//进入后台
+    Route::get('select_restaurant/{id}','IndexController@selectRestaurant');
+
+    Route::group(['middleware'=>'admin.restaurant'],function (){
+        /** 创建排班 */
+        Route::post('create_schedule','ScheduleController@create');
+    });
 
     Route::post('/create_company','IndexController@createCompany')->name('create-company');//创建公司
     Route::post('/create_restaurant','IndexController@createRestaurant')->name('create-restaurant');//创建门店
@@ -15,8 +22,6 @@ Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],
     Route::post('/assign_employee','EmployeeController@assignEmployeeToRestaurant')->name('assign-employee');//分配员工
 
     Route::get('/restaurant_employee/{restaurantId}','EmployeeController@getRestaurantEmployee')->name('get-restaurant-employee');//获取门店的员工
-
-    Route::put('/test','IndexController@test');
 
 });
 

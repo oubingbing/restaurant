@@ -28,7 +28,11 @@ class AdminAuth
             //重新把数据写入redis,有点吊
             $user = User::query()->where(User::FIELD_EMAIL,$email)->first();
             $user->cacheUserInfo($request,$user);
+            $userInfo = Redis::hgetall($email);
         }
+
+        //写入用户信息
+        $request->offsetSet('user_info',$userInfo);
 
         $route = \Route::currentRouteName();
         $permission = Permission::searchPermissionByName($route);
@@ -39,7 +43,7 @@ class AdminAuth
                 return $next($request);
             }else{
                 echo '无权限';
-                //return redirect('not_auth');
+                return redirect('not_auth');
             }
         }
 

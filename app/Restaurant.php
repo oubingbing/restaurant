@@ -9,6 +9,8 @@
 namespace App;
 
 
+use Illuminate\Support\Facades\Redis;
+
 class Restaurant extends BaseModel
 {
     protected $table = 'restaurants';
@@ -32,6 +34,22 @@ class Restaurant extends BaseModel
 
     /** 公司表外键 */
     const FIELD_COMPANY_ID = 'company_id';
+
+    public static function cacheRestaurant($restaurant,$request)
+    {
+        $email = $request->session()->get('email');
+        $restaurantMark = 'restaurant_'.$email;
+        Redis::hmset($restaurantMark,$restaurant->toArray());
+        $restaurantInfo = Redis::hgetall($restaurantMark);
+        return $restaurantInfo;
+    }
+
+    public static function clearRestaurant($request)
+    {
+        $email = $request->session()->get('email');
+
+        return Redis::del('restaurant_'.$email);
+    }
 
     /**
      * 获取门店的员工
