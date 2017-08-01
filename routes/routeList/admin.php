@@ -20,6 +20,11 @@ Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],
 
         /** 给员工排班 */
         Route::post('assign_schedule','ScheduleController@assign');
+
+        /** 新建一级分组 */
+        Route::post('create_group_one','MaterialController@createOneLevelGroup');
+        /** 新建二级分组 */
+        Route::post('create_group_two','MaterialController@createTowLevelGroup');
     });
 
     Route::post('/create_company','IndexController@createCompany')->name('create-company');//创建公司
