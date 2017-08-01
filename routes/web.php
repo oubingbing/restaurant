@@ -13,6 +13,7 @@
 
 require('routeList/auth.php');
 require('routeList/admin.php');
+require('routeList/mobile.php');
 
 Route::get('/', function () {
     return view('welcome');

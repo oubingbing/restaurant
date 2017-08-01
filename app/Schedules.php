@@ -43,6 +43,21 @@ class Schedules extends BaseModel
     /** FIELD_TYPE 排班类型 */
     const FIELD_TYPE = 'type';
 
+    /** FIELD_WEEK */
+    const FIELD_WEEK = 'week';
+
+    /** Field hour_salary */
+    const FIELD_HOUR_SALARY = 'hour_salary';
+
+    /** 排班开启 */
+    const ENUM_SCHEDULE_OPEN = 1;
+    /** 排班关闭 */
+    const ENUM_SCHEDULE_CLOSE = 2;
+
+    /** 固定排班 */
+    const ENUM_FIXED_SCHEDULE = 1;
+    const ENUM_TEMPORARY_SCHEDULE = 2;
+
     protected $fillable = [
         self::FIELD_ID,
         self::FIELD_NAME,
@@ -53,7 +68,20 @@ class Schedules extends BaseModel
         self::FIELD_ID_USER,
         self::FIELD_ID_RESTAURANT,
         self::FIELD_STATUS,
-        self::FIELD_TYPE
+        self::FIELD_TYPE,
+        self::FIELD_WEEK
     ];
+
+    public static function searchScheduleById($id)
+    {
+        if (empty($id))
+            return false;
+
+        $result = Schedules::find($id);
+        if ($result)
+            return true;
+        else
+            return false;
+    }
 
 }

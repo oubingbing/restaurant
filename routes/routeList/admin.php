@@ -9,11 +9,17 @@
 
 Route::group(['prefix'=>'admin','middleware'=>'admin.sky','namespace'=>'Admin'],function (){
     Route::get('/','IndexController@index')->name('entry-admin');//进入后台
+    /** 选择餐厅 */
     Route::get('select_restaurant/{id}','IndexController@selectRestaurant');
 
     Route::group(['middleware'=>'admin.restaurant'],function (){
         /** 创建排班 */
         Route::post('create_schedule','ScheduleController@create');
+        /** 修改排班 */
+        Route::post('edit_schedule','ScheduleController@update');
+
+        /** 给员工排班 */
+        Route::post('assign_schedule','ScheduleController@assign');
     });
 
     Route::post('/create_company','IndexController@createCompany')->name('create-company');//创建公司
