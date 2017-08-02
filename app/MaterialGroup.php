@@ -45,4 +45,30 @@ class MaterialGroup extends BaseModel
         self::FIELD_STATUS
     ];
 
+    /**
+     * 获取分组列表,根据传递的分组参数获取分组列表
+     * @author yezi
+     * @param $restaurant_id
+     * @param $group
+     * @return array
+     */
+    public static function Group($restaurant_id, $group)
+    {
+        if (empty($restaurant_id) || empty($group))
+            return ['status' => false, 'message' => '参数错误，有空数据', 'data' => null];
+
+        if (!in_array($group,[self::ENUM_ONE_LEVEL_GROUP,self::ENUM_TWO_LEVEL_GROUP]))
+            return ['status' => false, 'message' => '参数错误', 'data' => null];
+
+        $oneLevelGroup = self::where([
+            self::FIELD_ID_RESTAURANT => $restaurant_id,
+            self::FIELD_TYPE => $group
+        ])->get([self::FIELD_ID, self::FIELD_NAME]);
+        if ($oneLevelGroup)
+            return ['status' => true, 'message' => '获取成功', 'data' => $oneLevelGroup];
+        else
+            return ['status' => false, 'message' => '没有相关数据', 'data' => null];
+
+    }
+
 }
