@@ -6,9 +6,16 @@
  * Time: 18:04
  */
 
-Route::group(['prefix'=>'mobile','middleware'=>'admin.sky','namespace'=>'Mobile'],function (){
-    Route::group(['middleware'=>'admin.restaurant'],function (){
-        /** 签到 */
-        Route::get('sign','EmployeeController@sign');
-    });
+Route::group(['prefix' => 'mobile', 'namespace' => 'Mobile'], function () {
+    Route::get('login', 'AuthController@index');
+});
+
+Route::group(['prefix' => 'mobile', 'middleware' => ['admin.restaurant','admin.sky'], 'namespace' => 'Mobile'], function () {
+    /** 签到页面 */
+    Route::get('sign', 'SignController@index');
+
+    /** 点击签到 */
+    Route::patch('sign', 'SignController@sign');
+
+    Route::get('purchase','PurchaseController@index');
 });

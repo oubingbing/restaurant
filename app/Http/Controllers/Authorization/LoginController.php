@@ -10,8 +10,11 @@ namespace App\Http\Controllers\Authorization;
 
 
 use App\Http\Controllers\BaseController;
+use App\Restaurant;
 use App\User;
+use App\UserRestaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends BaseController
 {
@@ -37,6 +40,7 @@ class LoginController extends BaseController
     {
         $email = $request->input('email');
         $password = $request->input('password');
+        $type = $request->input('type');
 
         if (empty($email))
             return $this->setStatusCode(500)->responseError('登录邮箱不能为空');
@@ -55,9 +59,15 @@ class LoginController extends BaseController
 
         if ($password.$user->salt === decrypt($user->password)){
             $userInfo = $user->cacheUserInfo($request,$user);
+
+            if ($type == 'mobile'){
+                $userRestaurant = UserRestaurant::where(UserRestaurant::FIELD_USER_ID,$userInfo['id'])->first();
+                Restaurant::cacheRestaurant($userRestaurant->restaurant,$request);
+            }
+
             return $this->setStatusCode(200)->responseSuccess('登录成功',$userInfo);
         }else{
-            return $this->setStatusCode(500)->responseFail('用户不存在或密码错误2');
+            return $this->setStatusCode(500)->responseFail('用户不存在或密码错误');
         }
     }
 
@@ -77,7 +87,7 @@ class LoginController extends BaseController
         $result = User::clearUserInfo($request);
 
         if ($result)
-            return $this->setStatusCode(200)->responseSuccess('退成成功');
+            return redirect('auth/login');
         else
             return $this->setStatusCode(500)->responseFail('操作失败');
     }

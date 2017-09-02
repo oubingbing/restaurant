@@ -20,10 +20,19 @@ use Mail;
 
 class EmployeeController extends BaseController
 {
+
+    public function index(Request $request)
+    {
+        $companyId = User::companyId($this->getSessionEmail($request));
+        $employeeList = User::query()->where([User::FIELD_COMPANY_ID => $companyId, User::FIELD_STATUS => User::ENUM_STATUS_ACTIVE])->get();
+
+        return view('admin.employeeIndex', ['employees' => $employeeList]);
+    }
+
     /**
      * 添加新员工
      * @author yezi
-     * @param Request $request,
+     * @param Request $request ,
      *       (string)email:员工邮箱
      * @return mixed
      */
@@ -34,23 +43,32 @@ class EmployeeController extends BaseController
         if (empty($email))
             return $this->setStatusCode(500)->responseError('邮箱不能为空');
 
-        $checkEmail = User::query()->where(User::FIELD_EMAIL,$email)->value('email');
-        if ($checkEmail)
-            return $this->setStatusCode(200)->responseError('邮箱已存在');
+        $checkEmail = User::query()->where(User::FIELD_EMAIL, $email)->first();
+        if ($checkEmail){
+            if ($checkEmail->{User::FIELD_STATUS} == User::ENUM_STATUS_NOT_ACTIVE){
+                $checkEmail->{User::FIELD_ACTIVATE_TIME} = date('Y-m-d H:i:s', (time() + (60 * 60 * 24)));
+                $checkEmail->save();
+                Mail::to($email)->send(new ActivateAccount($checkEmail));
+                return $this->setStatusCode(200)->responseSuccess('重新发送账号激活链接');
+            }else{
+                return $this->setStatusCode(200)->responseError('邮箱已存在');
+            }
+        }
 
-        $user =  User::create([
-            'username'       => 'clock',
-            'email'          => $email,
-            'password'       => 'clock',
-            'salt'           => random_int(1000,10000),
+        $user = User::create([
+            'username' => 'clock',
+            'email' => $email,
+            'password' => 'clock',
+            'salt' => random_int(1000, 10000),
             'activate_token' => str_random(50),
-            'company_id'     => Company::companyId(User::userId($request->session()->get('email')))
+            'company_id' => Company::companyId(User::userId($request->session()->get('email'))),
+            'activate_time' => date('Y-m-d H:i:s', (time() + (60 * 60 * 24)))
         ]);
 
-        if ($user){
+        if ($user) {
             Mail::to($email)->send(new ActivateAccount($user));
             return $this->setStatusCode(200)->responseSuccess('添加员工成功，请员工登录邮箱激活账号');
-        }else{
+        } else {
             return $this->setStatusCode(500)->responseFail('添加失败');
         }
 
@@ -64,7 +82,7 @@ class EmployeeController extends BaseController
     public function getCompanyEmployee(Request $request)
     {
         $companyId = User::companyId($this->getSessionEmail($request));
-        $employeeList = User::query()->where([User::FIELD_COMPANY_ID=>$companyId,User::FIELD_STATUS=>User::STATUS_ACTIVE])->get(['id','username']);
+        $employeeList = User::query()->where([User::FIELD_COMPANY_ID => $companyId, User::FIELD_STATUS => User::STATUS_ACTIVE])->get(['id', 'username']);
         return $employeeList;
     }
 
@@ -78,7 +96,7 @@ class EmployeeController extends BaseController
      */
     public function assignEmployeeToRestaurant(Request $request)
     {
-        $employeeId   = $request->input('employee_id');
+        $employeeId = $request->input('employee_id');
         $restaurantId = $request->input('restaurant_id');
 
         if (empty($employeeId))
@@ -88,15 +106,15 @@ class EmployeeController extends BaseController
             return $this->setStatusCode(500)->responseError('店铺不能为空');
 
         $companyId = User::companyId($this->getSessionEmail($request));
-        $user = User::query()->where([User::FIELD_ID=>$employeeId,User::FIELD_COMPANY_ID=>$companyId])->first();
+        $user = User::query()->where([User::FIELD_ID => $employeeId, User::FIELD_COMPANY_ID => $companyId])->first();
         if (!$user)
             return $this->setStatusCode(500)->responseError('员工不存在');
 
-        $restaurant = Restaurant::query()->where([Restaurant::FIELD_ID=>$restaurantId,Restaurant::FIELD_COMPANY_ID=>$companyId])->first();
+        $restaurant = Restaurant::query()->where([Restaurant::FIELD_ID => $restaurantId, Restaurant::FIELD_COMPANY_ID => $companyId])->first();
         if (!$restaurant)
             return $this->setStatusCode(500)->responseError('门店不存在不存在');
 
-        $result = UserRestaurant::assign($employeeId,$restaurantId,$companyId);
+        $result = UserRestaurant::assign($employeeId, $restaurantId, $companyId);
         if ($result)
             return $this->setStatusCode(200)->responseSuccess('提交成功');
         else
@@ -115,11 +133,11 @@ class EmployeeController extends BaseController
 
         //通过第三方表获取门店的员工
         $restaurant = Restaurant::find($restaurantId);
-        if (!empty($restaurant)){
-            $employeeList = collect($restaurant->employee)->map(function ($value){
-               return collect($value)->only(['id','username']);
+        if (!empty($restaurant)) {
+            $employeeList = collect($restaurant->employee)->map(function ($value) {
+                return collect($value)->only(['id', 'username']);
             });
-        }else{
+        } else {
             $employeeList = [];
         }
 

@@ -37,6 +37,12 @@ class Sign extends BaseModel
     /** Field total_salary */
     const FIELD_TOTAL_SALARY = 'total_salary';
 
+    /** Field created_at */
+    const FIELD_CREATED_AT = 'created_at';
+
+    /** Field updated_at */
+    const FIELD_UPDATED_AT = 'updated_at';
+
     protected $fillable = [
         self::FIELD_ID,
         self::FIELD_ID_SCHEDULE,

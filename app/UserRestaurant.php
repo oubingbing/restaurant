@@ -74,4 +74,9 @@ class UserRestaurant extends BaseModel
 
     }
 
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class,self::FIELD_RESTAURANT_ID,Restaurant::FIELD_ID);
+    }
+
 }

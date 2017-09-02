@@ -14,7 +14,8 @@
 require('routeList/auth.php');
 require('routeList/admin.php');
 require('routeList/mobile.php');
+require('routeList/note.php');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+

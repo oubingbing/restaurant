@@ -44,13 +44,17 @@ class User extends Authenticatable
     /** 是否是创始人 */
     const FIELD_FOUNDER = 'founder';
 
+    /** Field activate_time 账号激活链接过期时间 */
+    const FIELD_ACTIVATE_TIME = 'activate_time';
+
+
     /** status状态值的描述 */
-    const STATUS_NOT_ACTIVE = 1;
-    const STATUS_ACTIVE = 2;
+    const ENUM_STATUS_NOT_ACTIVE = 1;
+    const ENUM_STATUS_ACTIVE = 2;
 
     /** 是否是创始人 */
-    const IS_FOUNDER = true;
-    const NOT_FOUNDER = false;
+    const ENUM_IS_FOUNDER = true;
+    const ENUM_NOT_FOUNDER = false;
 
     /**
      * The attributes that are mass assignable.

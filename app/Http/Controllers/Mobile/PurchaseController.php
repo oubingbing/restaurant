@@ -25,7 +25,6 @@ class PurchaseController extends BaseController
     public function index(Request $request)
     {
         $restaurant = $request->get('restaurant');
-        $input = $restaurant->input();
 
         $materials = Material::materials($restaurant['id']);
 

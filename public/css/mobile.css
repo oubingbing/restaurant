@@ -1,0 +1,300 @@
+.login-container{
+    background: #2D303F;
+}
+.login-container .title{
+    width: 100%;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    color: white;
+}
+
+.login-container .form-container{
+
+}
+
+.form-container img{
+    height: 30px;
+}
+
+.form-container .label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-container .login-input{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 1px white;
+    margin-top: 20px;
+}
+
+.form-container input{
+    padding: 15px 15px;
+    background: #2D303F;
+    border: solid 0px;
+    width: 100%;
+    outline:none;
+    font-size: 15px;
+    color: white;
+}
+
+.login-container .login-button{
+    padding: 16px 16px;
+    width: 100%;
+    background: #27CDC3;
+    border: solid 1px #27CDC3;
+    margin-top: 50px;
+    color: white;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    font-size: 20px;
+}
+
+.form-container{
+    margin-left:10px;
+    margin-right:10px;
+    border-radius:20px 10px 5px 2px;
+    padding: 15px 15px;
+}
+
+.form-container .tips{
+    color: gray;
+    margin-top:40px;
+}
+
+.form-container .create-user{
+    color: #505050;
+    text-align: center;
+    margin-top:60px;
+}
+
+/** 签到页面 **/
+.sign-container{
+
+}
+
+.sign-container .sign-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: #2D303F;
+    overflow:auto;
+}
+
+.sign-container .mt-tab-container{
+    margin-top: 11%;
+}
+
+.sign-container .mt-navbar{
+    background: #FAFAFA;
+    color: black;
+}
+
+.sign-container .mt-tab-container{
+}
+
+.sign-content img{
+    width:100px;
+}
+
+.sign-content .sign-icon{
+    margin-top:10%;
+    margin-bottom: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+@-webkit-keyframes rotation{
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+
+}
+
+.sign-content img{
+    -webkit-transform: rotate(360deg);
+    animation: rotation 5s linear infinite;
+    -moz-animation: rotation 5s linear infinite;
+    -webkit-animation: rotation 5s linear infinite;
+    -o-animation: rotation 5s linear infinite;
+}
+
+.sign-content .sign-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top:30px;
+    width:100%;
+}
+
+.sign-detail .detail-item{
+    margin-top: 10px;
+    margin-left:20px;
+    margin-right:20px;
+    background: white;
+    padding:10px 10px;
+    border-radius:5px;
+}
+
+.sign-container .assign-container{
+    margin-top: 40px;
+    margin-left:20px;
+    margin-right:20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: solid 1px white;
+    padding-top:20px;
+
+}
+
+.sign-container .assign-employee{
+    width:20%;
+    background:#03CF8A;
+    margin: 10px 10px;
+    border-radius:5px;
+    text-align: center;
+    color: white ;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+.assign-employee p{
+    padding: 5px 5px;
+}
+
+/** 采购 **/
+
+.purchase-container{
+    width:100%;
+}
+
+.purchase-container .total-materials{
+    width: 100%;
+    margin-top: 15%;
+    margin-bottom: 17%;
+}
+
+.total-materials .material-item{
+    display: flex;
+    flex-direction: column;
+    background: darkgray;
+    color: white;
+    margin: 15px 20px;
+    padding: 20px 10px;
+    border-radius: 6px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    font-weight: 500;
+}
+
+.material-item .material-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.material-item .purchase-material{
+    border-top: solid 1px white;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.purchase-material input{
+    padding: 10px 0px;
+    border-radius: 5px;
+    border: solid 0px;
+}
+
+.purchase-material button{
+    padding: 10px 10px;
+    font-size: 10px;
+    border-radius: 5px;
+    border: solid 0px;
+    /*background: #FF4500;*/
+    background: white;
+}
+
+.material-item .car{
+    width: 23px;
+    height:23px;
+}
+
+.my-purchase-materials {
+
+}
+
+.purchase-container .my-purchase-materials{
+    width: 100%;
+    margin-top: 15%;
+    margin-bottom: 17%;
+}
+
+.my-purchase-materials .material-item{
+    display: flex;
+    flex-direction: column;
+    background: #03CF8A;
+    color: white;
+    margin: 15px 20px;
+    padding: 20px 10px;
+    border-radius: 6px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    font-weight: 500;
+}
+
+.my-purchase-materials .material-info{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.my-purchase-materials .material-info-header, .material-info-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.my-purchase-materials .material-info-footer,.order-time{
+    margin-top: 8px;
+}
+
+.my-purchase-materials .order-time{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.my-purchase-materials .purchase-material{
+    border-top: solid 1px white;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.my-purchase-materials input{
+    padding: 10px 0px;
+    border-radius: 5px;
+    border: solid 0px;
+}
+
+.my-purchase-materials button{
+    padding: 10px 10px;
+    font-size: 10px;
+    border-radius: 5px;
+    border: solid 0px;
+    background: #FF4500;
+    color:white;
+}

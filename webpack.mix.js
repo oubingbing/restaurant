@@ -1,5 +1,16 @@
 let mix = require('laravel-mix');
 
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
+        ]
+    }
+});
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,4 +23,11 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.combine([
+    'resources/assets/css/home.css',
+], 'public/css/style.css');
+
+//mobile
+mix.js('resources/assets/js/mobile.js', 'public/js');

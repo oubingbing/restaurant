@@ -1,0 +1,107 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.login-form{
+    width: 27%;
+    background: #FFFFFF;
+    margin-top: 50px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+.login-info{
+    width: 27%;
+    margin-top: 10px;
+}
+.login-form form{
+    margin: 10px;
+    padding: 10px;
+}
+
+form .btn-login{
+    color: white;
+    background: #03CF8A;
+}
+
+form .btn-login:hover{
+    background:#03CF8A;
+    color: white;
+}
+
+.navbar a{
+    margin: 10px auto;
+    text-align: center;
+}
+
+.forget-password{
+    margin-top: 10px;
+    margin-bottom: -5px;
+}
+
+.forget-password a{
+    color: gray;
+}
+
+.register-button:hover{
+    background:red;
+    color: white;
+}
+.navbar-right .login-url{
+    margin-right: 5px;
+}
+#login-url,#register-url{
+    background:#03CF8A;
+    color: white;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+.navbar-header{
+    border-right: solid 0.5px gainsboro;
+}
+.navbar-header .navbar-brand{
+    font-size: 30px;
+}
+#home{
+    font-size: 20px;
+}
+
+.login-info{
+    width: 29%;
+    margin-top: 10px;
+}
+
+/*********************************选择门店的样式*****************************/
+.select-li{
+    height: 200px;
+    width: 250px;
+    margin: 0px 10px;
+    background: white;
+    -webkit-box-shadow:0 0 10px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 10px rgba(79, 79, 79, .5);
+    box-shadow:0 0 10px rgba(79, 79, 79, .5);
+}
+
+.select-li:hover{
+    margin-top: -20px;
+    background: #03CF8A;
+    color: white;
+    -webkit-box-shadow:0 0 10px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 10px rgba(79, 79, 79, .5);
+    box-shadow:0 0 10px rgba(79, 79, 79, .5);
+    transition: margin-top 0.6s;
+    -webkit-transition: margin-top 0.6s;
+}
+
+.select-li p{
+    font-size: 13px;
+}
+
+.container-select a{
+    color: gray;
+}
+/*************************************************************************/

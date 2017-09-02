@@ -75,8 +75,9 @@ class RegisterController extends BaseController
         if (!$user)
             abort(404,'找不到用户');
 
-        $user->activate_token = str_random(50);
-        $user->save();
+        if (time() > time($user->{User::FIELD_ACTIVATE_TIME})){
+            abort(404,'链接已过期');
+        }
 
         return view('auth.activateAccount',['user'=>$user]);
     }
@@ -112,13 +113,15 @@ class RegisterController extends BaseController
         }
 
         $user = User::query()->where([User::FIELD_ACTIVATE_TOKEN=>$token,User::FIELD_EMAIL=>$email])->first();
-
         if (!$user)
             return $this->setStatusCode(500)->responseNotFound('没有找到您的账号信息');
 
+        if ($user->{User::FIELD_STATUS} == User::ENUM_STATUS_ACTIVE)
+            return $this->setStatusCode(500)->responseNotFound('您的账号已激活无需重复激活');
+
         $user->username = $name;
         $user->password = encrypt($password.$user->salt);
-        $user->activate_token = str_random(50);
+        $user->status = User::ENUM_STATUS_ACTIVE;
         $result = $user->save();
         if ($result)
             return $this->setStatusCode(500)->responseSuccess('提交成功');

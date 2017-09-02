@@ -31,10 +31,12 @@ class AdminAuth
             $userInfo = Redis::hgetall($email);
         }
 
+            view()->share('user',$userInfo);
+
         //写入用户信息
         $request->offsetSet('user_info',$userInfo);
 
-        $route = \Route::currentRouteName();
+        /*$route = \Route::currentRouteName();
         $permission = Permission::searchPermissionByName($route);
         if ($permission){
             $user = User::query()->where(User::FIELD_EMAIL,$email)->first();
@@ -45,7 +47,7 @@ class AdminAuth
                 echo '无权限';
                 return redirect('not_auth');
             }
-        }
+        }*/
 
         return $next($request);
 

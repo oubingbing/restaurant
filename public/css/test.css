@@ -1,0 +1,375 @@
+.container-dashboard{
+    width: 97%;
+    margin: 0px auto;
+    height: 100%;
+}
+
+.container-dashboard .dashboard-slider{
+    width: 8%;
+}
+
+.slider{
+    background: #03CF8A;
+    color: white;
+    font-size: 20px;
+    width: 100%;
+    height: 100px;
+    margin: 10px auto;
+    text-align: center;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+
+.slider div{
+    text-align: center;
+    display: flex;
+    flex-direction:column;
+}
+
+.slider .hide-item{
+    color: #03CF8A;
+}
+
+.slider:hover{
+    margin-right: -20px;
+    cursor: pointer;
+}
+
+.dashboard-slider-sub{
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+.dashboard-slider-sub .sub-item div{
+    background: #03CF8A;
+    width: 100px;
+    padding: 5px auto;
+    margin-top: 10px;
+    margin-left: -10px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+.dashboard-main .main-item{
+    background: white;
+    height: 400px;
+    margin: 15px 15px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+
+    margin-left:10px;
+    overflow-y:scroll;
+}
+
+.dashboard-main .main-item:hover{
+    background: #03CF8A;
+    color: white;
+}
+
+.title-container{
+    border-bottom: solid 1px lavender;
+}
+
+.main-item-content ul{
+    list-style:none;
+}
+
+.main-item-content li{
+    padding: 10px;
+    border-bottom: solid 1px lavender;
+    border-left: solid 1px lavender;
+    border-right: solid 1px lavender;
+    border-radius:2px;
+}
+
+#navbar-user-name{
+    border: solid 1px darkgrey;
+    border-radius:15px;
+}
+
+#navbar-user-name:hover{
+    background: #03CF8A;
+    border: solid 1px lightgray;
+    color: white;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+/**头部导航栏**/
+
+。navbar-collapse{
+    position:relative;
+}
+
+.user-info{
+    position: absolute;
+    z-index: 100;
+    right: 8px;
+    margin-top: 80px;
+    text-align: center;
+    background: white;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+.user-info ul{
+    width: 100px;list-style:none;
+}
+
+.user-info li{
+    margin-top: 10px
+}
+
+.user-info a{
+    color: gray;
+    text-decoration:none;
+}
+
+.user-info li:hover{
+    background: #03CF8A;
+    color: white;
+    margin: 5px 5px;
+    border: solid 1px darkgrey;
+    border-radius:10px;
+}
+
+
+/** 员工主页 **/
+.employee{
+    position: relative;
+}
+
+.employee .employee-manager{
+    position: relative;
+    text-align: center;
+    left: 20px;
+    width: 145px;
+    z-index: 100;
+}
+
+.employee-manager .manager-item{
+    background: #03CF8A;
+    color: white;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+}
+
+.employee-manager .manager-item:hover{
+    cursor: pointer;
+}
+
+.create-container{
+    position: absolute;
+    z-index: 100;
+    width: 32%;
+    height: 350px;
+    background: #03CF8A;
+    margin: 10px auto;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.create-employee-title{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    border-bottom: solid 1px;
+}
+
+.create-employee-title h4{
+    margin-left: 12%;
+}
+
+.create-employee-tips{
+    margin-top: 10px;
+}
+
+.create-employee-title p{
+    margin-top: 10px;
+}
+
+.create-form{
+    width: 80%;
+    color: white;
+    margin-top: 20px;
+}
+
+
+#employee-container{
+    width: 80%;
+    margin: 0px auto;
+    position: relative;
+    margin-left: 50px;
+}
+#employee-container .employee-item{
+    width: 100%;
+    margin-right: 10px;
+}
+
+#employee-container .item-content:hover{
+    margin-top: -20px;
+    cursor: pointer;
+}
+
+#employee-container .item-content{
+    margin: 0px 10px;
+    width: 200px;
+    background: white;
+    height: 150px;
+    -webkit-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    -moz-box-shadow:0 0 8px rgba(79, 79, 79, .5);
+    box-shadow:0 0 8px rgba(79, 79, 79, .5);
+
+    transition: margin-top 0.6s;
+    -webkit-transition: margin-top 0.6s;
+}
+
+.avatar{
+    height: 50%;
+}
+
+.avatar img{
+    width: 60%;
+    margin: 5px 5px;
+    border-radius:5%;
+    float: left;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile div{
+    border-bottom: solid 1px darkgrey;
+    margin-right: 5px;
+}
+
+.des{
+    padding: 5px 5px;
+}
+
+.close{
+    float: right;
+    position: absolute;
+    background: #03CF8A;
+    top: 0px;
+    right: 0px;
+    padding: 10px 10px;
+    margin: 5px 5px;
+    color: white;
+    border: solid 1px;
+    border-radius: 10px;
+    filter:alpha(Opacity=80);
+    -moz-opacity:0.5;opacity: 1;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.close:hover{
+    cursor: pointer;
+    background: orangered;
+    color: white;
+    filter:alpha(Opacity=80);
+    -moz-opacity:0.5;opacity: 1;
+    font-weight: 100;
+}
+.vue-container{
+    position: relative;
+}
+.error{
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    margin-left: 60px;
+    width: 20%;
+    color: white;
+    border-radius: 10px;
+    background: black;
+    word-wrap: break-word;
+    border: solid 0px;
+    z-index: 200;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+    opacity: 0
+}
+
+
+.create-from{
+    width: 30%;
+    height: 400px;
+    background: #03CF8A;
+    position: relative;
+    margin: 10px auto;
+}
+.create-employee-from{
+    position: absolute;
+    width: 30%;
+    height: 400px;
+    background: #03CF8A;
+    top:50%; left:50%;
+}
+
+.sheet{
+    width: 55%;
+    height:550px;
+}
+
+.sheet-btn{
+
+}
+
+.sheet-form-container{
+    height:400px;
+}
+
+.sheet button{
+    margin-left: 14px;
+}
+
+
+/** 激活用户账号**/
+.activate-container{
+    height: 500px;
+}
+
+.vue-container a{
+    color:white;
+}
+
+.vue-container a:hover{
+    text-decoration:none;
+}
+
+.create-group-one{
+    height:250px;
+}
+
+.create-material{
+    height:600px;
+}
+
+
+
+
+
+

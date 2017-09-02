@@ -38,6 +38,14 @@ class Material extends BaseModel
     /** Field founder id 创建人 */
     const FIELD_ID_FOUNDER = 'founder_id';
 
+    /** Field type 材料类型 */
+    const FIELD_TYPE = 'type';
+
+    /** 物料 */
+    const ENUM_TYPE_FOOD = 1;
+    /** 食材 */
+    const ENUM_TYPE_MATERIAL = 2;
+
     protected $fillable = [
         self::FIELD_ID,
         self::FIELD_NAME,
@@ -46,8 +54,15 @@ class Material extends BaseModel
         self::FIELD_UNIT,
         self::FIELD_ONE_LEVEL_GROUP,
         self::FIELD_TWO_LEVEL_GROUP,
-        self::FIELD_ID_FOUNDER
+        self::FIELD_ID_FOUNDER,
+        self::FIELD_TYPE
     ];
+
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
+    /*protected $appends = [
+        'one_group'
+    ];*/
 
     /**
      * 获取一级分组
@@ -56,7 +71,7 @@ class Material extends BaseModel
      */
     public function oneLevelGroup()
     {
-        return $this->belongsTo(MaterialGroup::class,MaterialGroup::FIELD_ID,self::FIELD_ONE_LEVEL_GROUP);
+        return $this->belongsTo(MaterialGroup::class,self::FIELD_ONE_LEVEL_GROUP,MaterialGroup::FIELD_ID);
     }
 
     /**
@@ -66,7 +81,7 @@ class Material extends BaseModel
      */
     public function twoLevelGroup()
     {
-        return $this->belongsTo(MaterialGroup::class,MaterialGroup::FIELD_ID,self::FIELD_TWO_LEVEL_GROUP);
+        return $this->belongsTo(MaterialGroup::class,self::FIELD_TWO_LEVEL_GROUP,MaterialGroup::FIELD_ID);
     }
 
     /**
@@ -107,4 +122,5 @@ class Material extends BaseModel
         return $result;
 
     }
+
 }

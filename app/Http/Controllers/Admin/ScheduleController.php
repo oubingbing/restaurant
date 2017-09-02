@@ -15,6 +15,7 @@ use App\User;
 use App\UserRestaurant;
 use App\UserSchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ScheduleController extends BaseController
@@ -22,13 +23,14 @@ class ScheduleController extends BaseController
     /**
      * 创建排班
      * @param Request $request
+     * @param Request $request
      * @return mixed
      */
     public function create(Request $request)
     {
         $userInfo = $request->get('user_info');
         $restaurant = $request->get('restaurant');
-        $scheduleData = $request->input();
+        $scheduleData = $request->input('sheet_data');
 
         $message = [
             'name.required' => '排班名称不能为空',
@@ -78,14 +80,21 @@ class ScheduleController extends BaseController
             return $this->setStatusCode(500)->responseFail('创建失败');
     }
 
-    public function update($id)
+    /** 获取排班列表和员工列表 */
+    public function schedulesAndEmployees(Request $request)
     {
+        $userInfo = $request->get('user_info');
+        $restaurant = $request->get('restaurant');
 
-    }
+        $schedules = Schedules::where(Schedules::FIELD_ID_RESTAURANT,$restaurant['id'])->get(['id','name','type','status']);
+        $employees = DB::table('users as u')
+                        ->select('u.username','u.id')
+                        ->join('user_restaurants as r','r.user_id','=','u.id')
+                        ->where('r.restaurant_id',$restaurant['id'])
+                        ->where(User::FIELD_STATUS,User::ENUM_STATUS_ACTIVE)
+                        ->get();
 
-    public function delete()
-    {
-
+        return ['schedules'=>$schedules->toArray(),'employees'=>$employees];
     }
 
     /**

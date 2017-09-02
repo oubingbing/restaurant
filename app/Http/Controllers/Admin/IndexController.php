@@ -18,20 +18,45 @@ use Illuminate\Support\Facades\Validator;
 
 class IndexController extends BaseController
 {
-
-    public function test(Request $request)
-    {
-        return $request->input('name');
-    }
-
     /**
      * 后台首页
      * @author yezi
      * @return string
      */
-    public function index()
+    public function index(Request $request)
     {
-        return 'welcome to admin';
+        $userInfo = $request->get('user_info');
+
+        $restaurantList = Restaurant::where(Restaurant::FIELD_COMPANY_ID,$userInfo['company_id'])->get();
+
+        return view('admin.index',['restaurants'=>$restaurantList]);
+    }
+
+    /**
+     * 选择餐厅
+     * @author yezi
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function selectRestaurant(Request $request, $id)
+    {
+        $userInfo = $request->get('user_info');
+        if (empty($id))
+            return $this->setStatusCode(500)->responseError('餐厅不能为空');
+
+        $restaurant = Restaurant::where([
+            Restaurant::FIELD_ID => $id,
+            Restaurant::FIELD_COMPANY_ID => $userInfo[Restaurant::FIELD_COMPANY_ID]
+        ])->first();
+
+        if ($restaurant){
+            Restaurant::cacheRestaurant($restaurant,$request);
+            return view('admin/restaurant',['restaurant'=>$restaurant]);
+        }
+        else
+            return $this->setStatusCode(500)->responseFail('选择失败,该餐厅不存在');
+
     }
 
     /**
@@ -120,31 +145,5 @@ class IndexController extends BaseController
             return $this->setStatusCode(500)->responseFail('创建失败');
     }
 
-    /**
-     * 选择餐厅
-     * @author yezi
-     * @param Request $request
-     * @param $id
-     * @return mixed
-     */
-    public function selectRestaurant(Request $request, $id)
-    {
-        $userInfo = $request->get('user_info');
-        if (empty($id))
-            return $this->setStatusCode(500)->responseError('餐厅不能为空');
-
-        $restaurant = Restaurant::where([
-            Restaurant::FIELD_ID => $id,
-            Restaurant::FIELD_COMPANY_ID => $userInfo[Restaurant::FIELD_COMPANY_ID]
-        ])->first();
-
-        if ($restaurant){
-            Restaurant::cacheRestaurant($restaurant,$request);
-            return $this->setStatusCode(200)->responseSuccess('选择成功',$restaurant);
-        }
-        else
-            return $this->setStatusCode(500)->responseFail('选择失败,该餐厅不存在');
-
-    }
 
 }

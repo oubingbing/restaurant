@@ -45,6 +45,8 @@ class MaterialGroup extends BaseModel
         self::FIELD_STATUS
     ];
 
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
     /**
      * 获取分组列表,根据传递的分组参数获取分组列表
      * @author yezi
